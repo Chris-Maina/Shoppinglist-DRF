@@ -6,3 +6,7 @@ shoppinglistdrf/
 
 #vscode
 .vscode/
+
+# sqlite
+*.sqlite3
+db.sqlite3
