@@ -1,0 +1,8 @@
+# virtualenv
+shoppinglistdrf/
+
+# dotenv
+.env
+
+#vscode
+.vscode/
