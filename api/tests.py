@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from .models import Shoppinglist
+from .models import Shoppinglist, User
 
 # Create your tests here.
 class ModelTestCases(TestCase):
@@ -12,6 +12,7 @@ class ModelTestCases(TestCase):
         """ Define test variables """
         self.shoppinglist = Shoppinglist(
             name="Christmass shopping", description="Shopping for 2018 christmass")
+        self.test_user = User(username="test", email="test@gmail.com", password="testpassword")
 
     def test_shoppinglist_model(self):
         """ Test Shoppinglist model is created """
@@ -20,6 +21,12 @@ class ModelTestCases(TestCase):
         new_count = Shoppinglist.objects.count()
         self.assertNotEqual(old_count, new_count)
 
+    def test_user_model(self):
+        """ Test User model """
+        old_count = User.objects.count()
+        self.test_user.save()
+        new_count = User.objects.count()
+        self.assertNotEqual(old_count, new_count)
 class ViewTestCases(TestCase):
     """ Test cases for views """
     def setUp(self):
