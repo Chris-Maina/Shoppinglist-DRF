@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager)
 from django.utils.translation import ugettext_lazy as _
-
+from django.conf import settings
 # Create your models here.
 class UserManager(BaseUserManager):
     """ Base user manager class """
@@ -79,7 +79,7 @@ class User(AbstractBaseUser):
     def is_superuser(self):
         """ Define model property is_superuser to use superuser """
         return self.superuser
-    
+
     class Meta:
         """ Define verbose names """
         verbose_name = _('user')
@@ -89,6 +89,8 @@ class User(AbstractBaseUser):
 class Shoppinglist(models.Model):
     """ Shoppinglist model """
     name = models.CharField(max_length=50)
+    # use the model in settings.py. this syntax is dynamic
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
